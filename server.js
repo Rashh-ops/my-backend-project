@@ -1,4 +1,5 @@
 const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -17,7 +18,7 @@ const protectedRoutes = require('./routes/protectedRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-const app = express();
+
 app.use(express.json());
 
 const globalLimiter = rateLimit({
