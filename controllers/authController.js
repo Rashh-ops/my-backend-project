@@ -31,7 +31,7 @@ exports.signup = async (req, res) => {
 
     
 
-    const verificationUrl = `http://localhost:5000/api/auth/verify-email/${token}`;
+    const verificationUrl = `${process.env.BASE_URL}/api/auth/verify-email/${token}`;
     await sendEmail(newUser.email, "Verify your email", `<a href="${verificationUrl}">Click to verify</a>`);
 
     res.status(201).json({ message: "User registered. Check your email to verify." });
@@ -87,7 +87,7 @@ exports.forgotPassword = async (req, res) => {
   user.resetTokenExpiry = Date.now() + 3600000;
   await user.save();
 
-  const resetUrl = `http://localhost:5000/reset-password/${token}`;
+  const resetUrl = `${process.env.BASE_URL}/reset-password/${token}`;
   const html = `
     <h2>Password Reset</h2>
     <p>Click the link below to reset your password:</p>
@@ -159,7 +159,7 @@ exports.resendVerificationEmail = async (req, res) => {
   user.emailVerificationToken = emailToken;
   await user.save();
 
-  const verifyUrl = `http://localhost:5000/api/auth/verify-email/${emailToken}`;
+  const verifyUrl = `${process.env.BASE_URL}/api/auth/verify-email/${emailToken}`;
 
   const html = `
     <h2>Email Verification</h2>
