@@ -2,6 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+const helmet = require('helmet');
+const cors = require('cors');
+const morgan = require('morgan');
+
+app.use(helmet());
+app.use(cors());
+app.use(morgan('dev'));
+
 const rateLimit = require('express-rate-limit');
 const uploadRoutes = require('./routes/uploadRoutes');
 const authRoutes = require('./routes/authRoutes');
